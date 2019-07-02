@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="exports.def" />
+    <None Include="..\f4se\f4se\GameRTTI.inl">
+      <Filter>F4SE</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{397a9eea-b026-4ff5-b1b3-c3d568571dd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Xbyak">
+      <UniqueIdentifier>{ba039329-f491-474e-877f-d721ea25b16b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="F4SE">
+      <UniqueIdentifier>{8bf218e2-3d63-491e-94c5-aae693fd9d86}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="VersionInfo.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Hooks.h" />
+    <ClInclude Include="F4zRoDohInternals.h" />
+    <ClInclude Include="..\f4se\xbyak\xbyak.h">
+      <Filter>Xbyak</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\xbyak\xbyak_bin2hex.h">
+      <Filter>Xbyak</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\xbyak\xbyak_mnemonic.h">
+      <Filter>Xbyak</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\xbyak\xbyak_util.h">
+      <Filter>Xbyak</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\f4se\BSGeometry.h">
+      <Filter>F4SE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\f4se\BSGraphics.h">
+      <Filter>F4SE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\f4se\BSLight.h">
+      <Filter>F4SE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\f4se\BSSkin.h">
+      <Filter>F4SE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\f4se\GameAPI.h">
+      <Filter>F4SE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\f4se\GameCamera.h">
+      <Filter>F4SE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\f4se\GameCustomization.h">
+      <Filter>F4SE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\f4se\GameData.h">
+      <Filter>F4SE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\f4se\GameEvents.h">
+      <Filter>F4SE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\f4se\GameExtraData.h">
+      <Filter>F4SE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\f4se\GameFormComponents.h">
+      <Filter>F4SE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\f4se\GameForms.h">
+      <Filter>F4SE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\f4se\GameInput.h">
+      <Filter>F4SE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\f4se\GameMemory.h">
+      <Filter>F4SE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\f4se\GameMessages.h">
+      <Filter>F4SE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\f4se\GameObjects.h">
+      <Filter>F4SE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\f4se\GameReferences.h">
+      <Filter>F4SE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\f4se\GameRTTI.h">
+      <Filter>F4SE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\f4se\GameSettings.h">
+      <Filter>F4SE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\f4se\GameStreams.h">
+      <Filter>F4SE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\f4se\GameThreads.h">
+      <Filter>F4SE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\f4se\GameTypes.h">
+      <Filter>F4SE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\f4se\GameUtilities.h">
+      <Filter>F4SE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\f4se\GameWorkshop.h">
+      <Filter>F4SE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\f4se\NiCloningProcess.h">
+      <Filter>F4SE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\f4se\NiExtraData.h">
+      <Filter>F4SE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\f4se\NiMaterials.h">
+      <Filter>F4SE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\f4se\NiNodes.h">
+      <Filter>F4SE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\f4se\NiObjects.h">
+      <Filter>F4SE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\f4se\NiProperties.h">
+      <Filter>F4SE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\f4se\NiRTTI.h">
+      <Filter>F4SE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\f4se\NiSerialization.h">
+      <Filter>F4SE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\f4se\NiTextures.h">
+      <Filter>F4SE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\f4se\NiTypes.h">
+      <Filter>F4SE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\f4se\f4se\PluginAPI.h">
+      <Filter>F4SE</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Hooks.cpp" />
+    <ClCompile Include="F4zRoDohInternals.cpp" />
+    <ClCompile Include="..\f4se\f4se\BSGeometry.cpp">
+      <Filter>F4SE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\f4se\f4se\BSGraphics.cpp">
+      <Filter>F4SE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\f4se\f4se\BSLight.cpp">
+      <Filter>F4SE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\f4se\f4se\GameAPI.cpp">
+      <Filter>F4SE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\f4se\f4se\GameCamera.cpp">
+      <Filter>F4SE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\f4se\f4se\GameCustomization.cpp">
+      <Filter>F4SE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\f4se\f4se\GameData.cpp">
+      <Filter>F4SE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\f4se\f4se\GameEvents.cpp">
+      <Filter>F4SE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\f4se\f4se\GameExtraData.cpp">
+      <Filter>F4SE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\f4se\f4se\GameFormComponents.cpp">
+      <Filter>F4SE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\f4se\f4se\GameForms.cpp">
+      <Filter>F4SE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\f4se\f4se\GameInput.cpp">
+      <Filter>F4SE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\f4se\f4se\GameMemory.cpp">
+      <Filter>F4SE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\f4se\f4se\GameMessages.cpp">
+      <Filter>F4SE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\f4se\f4se\GameObjects.cpp">
+      <Filter>F4SE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\f4se\f4se\GameReferences.cpp">
+      <Filter>F4SE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\f4se\f4se\GameRTTI.cpp">
+      <Filter>F4SE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\f4se\f4se\GameSettings.cpp">
+      <Filter>F4SE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\f4se\f4se\GameStreams.cpp">
+      <Filter>F4SE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\f4se\f4se\GameThreads.cpp">
+      <Filter>F4SE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\f4se\f4se\GameTypes.cpp">
+      <Filter>F4SE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\f4se\f4se\GameUtilities.cpp">
+      <Filter>F4SE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\f4se\f4se\GameWorkshop.cpp">
+      <Filter>F4SE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\f4se\f4se\NiExtraData.cpp">
+      <Filter>F4SE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\f4se\f4se\NiMaterials.cpp">
+      <Filter>F4SE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\f4se\f4se\NiNodes.cpp">
+      <Filter>F4SE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\f4se\f4se\NiObjects.cpp">
+      <Filter>F4SE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\f4se\f4se\NiProperties.cpp">
+      <Filter>F4SE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\f4se\f4se\NiRTTI.cpp">
+      <Filter>F4SE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\f4se\f4se\NiSerialization.cpp">
+      <Filter>F4SE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\f4se\f4se\NiTextures.cpp">
+      <Filter>F4SE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\f4se\f4se\NiTypes.cpp">
+      <Filter>F4SE</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="VersionInfo.rc">
+      <Filter>Resources</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
