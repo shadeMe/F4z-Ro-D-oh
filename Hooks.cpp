@@ -99,7 +99,7 @@ void SneakAtackVoicePath(CachedResponseData* Data, char* VoicePathBuffer)
 
 		if (ResponseText.length() > 1 || (ResponseText.length() == 1 && ResponseText[0] == ' ' && kSkipEmptyResponses.GetData().i == 0))
 		{
-			FORMAT_STR(ShimAssetFilePath, "Data\\Sound\\Voice\\F4z Ro Doh\\Stock_%d.xwm", SecondsOfSilence);
+			FORMAT_STR(ShimAssetFilePath, "Data\\Sound\\Voice\\F4z Ro Doh\\Stock_%d.wav", SecondsOfSilence);
 			CALL_MEMBER_FN(&Data->voiceFilePath, Set)(ShimAssetFilePath);
 #ifndef NDEBUG
 			_MESSAGE("Missing Asset - Switching to '%s'", ShimAssetFilePath);
@@ -203,7 +203,7 @@ bool InstallHooks()
 				jmp(ptr[rip]);
 				dq(hookedAddresses::kASCM_QueueNPCChatterData_DialogSubs_Exit);
 
-				L(ShowLabel);
+			L(ShowLabel);
 				jmp(ptr[rip]);
 				dq(hookedAddresses::kASCM_QueueNPCChatterData_DialogSubs_Show);
 			}
@@ -245,7 +245,7 @@ bool InstallHooks()
 				jmp(ptr[rip]);
 				dq(hookedAddresses::kASCM_QueueNPCChatterData_GeneralSubs_Exit);
 
-				L(ShowLabel);
+			L(ShowLabel);
 				jmp(ptr[rip]);
 				dq(hookedAddresses::kASCM_QueueNPCChatterData_GeneralSubs_Show);
 			}
