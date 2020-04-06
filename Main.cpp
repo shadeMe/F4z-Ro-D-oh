@@ -44,7 +44,7 @@ extern "C"
 
 		if (F4SE->isEditor)
 			return false;
-		else if (F4SE->runtimeVersion != RUNTIME_VERSION_1_10_138)
+		else if (F4SE->runtimeVersion != RUNTIME_VERSION_1_10_163)
 		{
 			_MESSAGE("Unsupported runtime version %08X", F4SE->runtimeVersion);
 			return false;

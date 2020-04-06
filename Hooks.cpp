@@ -6,12 +6,12 @@
 namespace hookedAddresses
 {
 	// E8 ? ? ? ? 48 8B F0 EB 03 49 8B F5 44 8B 43 08
-	RelocAddr<uintptr_t>	kCachedResponseData_Ctor(MAKE_RVA(0x0000000140CA1AD0));
+	RelocAddr<uintptr_t>	kCachedResponseData_Ctor(MAKE_RVA(0x0000000140CA1BF0));
 	uintptr_t				kCachedResponseData_Ctor_Hook = kCachedResponseData_Ctor + 0xEF;
 	uintptr_t				kCachedResponseData_Ctor_Ret = kCachedResponseData_Ctor + 0xF4;
 
 	// E8 ? ? ? ? 4C 8B 74 24 ? C6 45 3E 01
-	RelocAddr<uintptr_t>	kASCM_QueueNPCChatterData(MAKE_RVA(0x00000001412B2E50));
+	RelocAddr<uintptr_t>	kASCM_QueueNPCChatterData(MAKE_RVA(0x00000001412B2F70));
 	uintptr_t				kASCM_QueueNPCChatterData_DialogSubs_Hook = kASCM_QueueNPCChatterData + 0xAA;
 	uintptr_t				kASCM_QueueNPCChatterData_DialogSubs_Show = kASCM_QueueNPCChatterData + 0xBB;
 	uintptr_t				kASCM_QueueNPCChatterData_DialogSubs_Exit = kASCM_QueueNPCChatterData + 0x284;
@@ -22,7 +22,7 @@ namespace hookedAddresses
 
 
 	// 40 56 41 54 48 83 EC 48 48 8B F1
-	RelocAddr<uintptr_t>	kASCM_DisplayQueuedNPCChatterData(MAKE_RVA(0x00000001412B3410));
+	RelocAddr<uintptr_t>	kASCM_DisplayQueuedNPCChatterData(MAKE_RVA(0x00000001412B3530));
 	uintptr_t				kASCM_DisplayQueuedNPCChatterData_DialogSubs_Hook = kASCM_DisplayQueuedNPCChatterData + 0xC6;
 	uintptr_t				kASCM_DisplayQueuedNPCChatterData_DialogSubs_Show = kASCM_DisplayQueuedNPCChatterData + 0xE4;
 	uintptr_t				kASCM_DisplayQueuedNPCChatterData_DialogSubs_Exit = kASCM_DisplayQueuedNPCChatterData + 0xCF;
@@ -103,6 +103,7 @@ void SneakAtackVoicePath(CachedResponseData* Data, char* VoicePathBuffer)
 			CALL_MEMBER_FN(&Data->voiceFilePath, Set)(ShimAssetFilePath);
 #ifndef NDEBUG
 			_MESSAGE("Missing Asset - Switching to '%s'", ShimAssetFilePath);
+			_MESSAGE("\tResponse: '%s'", Data->responseText.c_str());
 #endif
 		}
 	}
@@ -135,13 +136,13 @@ bool ShouldForceSubs(NPCChatterData* ChatterData, UInt32 ForceRegardless, String
 
 bool InstallHooks()
 {
-	if (!g_branchTrampoline.Create(1024 * 64))
+	if (!g_branchTrampoline.Create(1024 * 2))
 	{
 		_ERROR("Couldn't create branch trampoline. this is fatal. skipping remainder of init process.");
 		return false;
 	}
 
-	if (!g_localTrampoline.Create(1024 * 64, nullptr))
+	if (!g_localTrampoline.Create(1024 * 2, nullptr))
 	{
 		_ERROR("Couldn't create codegen buffer. this is fatal. skipping remainder of init process.");
 		return false;

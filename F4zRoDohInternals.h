@@ -73,7 +73,7 @@ public:
 	MEMBER_FN_PREFIX(BSIStream);
 
 	// E8 ? ? ? ? 33 DB 38 5C 24 30
-	DEFINE_MEMBER_FN(Ctor, BSIStream*, MAKE_RVA(0x0000000141CC5A10), const char* FilePath, void* ParentLocation, bool Arg3);
+	DEFINE_MEMBER_FN(Ctor, BSIStream*, MAKE_RVA(0x0000000141CC5B30), const char* FilePath, void* ParentLocation, bool Arg3);
 
 	// members
 	///*00*/ void**					vtbl;
