@@ -183,6 +183,8 @@ bool InstallHooks()
 			{
 				Xbyak::Label ShowLabel;
 
+				push(rax);	// save/restore the handle to the source actor
+
 				mov(byte[rbp + 0x48], r14b);
 				mov(rax, (uintptr_t)CanShowDialogSubtitles);
 				PUSH_VOLATILE;
@@ -201,10 +203,12 @@ bool InstallHooks()
 				test(al, al);
 				jnz(ShowLabel);
 
+				pop(rax);
 				jmp(ptr[rip]);
 				dq(hookedAddresses::kASCM_QueueNPCChatterData_DialogSubs_Exit);
 
 			L(ShowLabel);
+				pop(rax);
 				jmp(ptr[rip]);
 				dq(hookedAddresses::kASCM_QueueNPCChatterData_DialogSubs_Show);
 			}
@@ -225,6 +229,8 @@ bool InstallHooks()
 			{
 				Xbyak::Label ShowLabel;
 
+				push(rax);	// save/restore the handle to the source actor
+
 				mov(byte[rbp + 0x48], al);
 				mov(rax, (uintptr_t)CanShowGeneralSubtitles);
 				PUSH_VOLATILE;
@@ -243,10 +249,12 @@ bool InstallHooks()
 				test(al, al);
 				jnz(ShowLabel);
 
+				pop(rax);
 				jmp(ptr[rip]);
 				dq(hookedAddresses::kASCM_QueueNPCChatterData_GeneralSubs_Exit);
 
 			L(ShowLabel);
+				pop(rax);
 				jmp(ptr[rip]);
 				dq(hookedAddresses::kASCM_QueueNPCChatterData_GeneralSubs_Show);
 			}
