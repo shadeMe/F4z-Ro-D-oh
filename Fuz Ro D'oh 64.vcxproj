@@ -83,7 +83,7 @@
       <Message>Setting build number...</Message>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>copy "$(TargetPath)" "$(F4SEPath)\Data\F4SE\Plugins\$(TargetFileName)"</Command>
+      <Command>copy "$(TargetPath)" "$(F4Path)\Data\F4SE\Plugins\$(TargetFileName)"</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Installing DLL...</Message>
@@ -119,7 +119,7 @@
       <Message>Setting build number...</Message>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>copy "$(TargetPath)" "$(F4SEPath)\Data\F4SE\Plugins\$(TargetFileName)"</Command>
+      <Command>copy "$(TargetPath)" "$(F4Path)\Data\F4SE\Plugins\$(TargetFileName)"</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Installing DLL...</Message>
