@@ -6,34 +6,33 @@
 namespace hookedAddresses
 {
 	// E8 ? ? ? ? 48 8B F0 EB 03 49 8B F5 44 8B 43 08
-	RelocAddr<uintptr_t>	kCachedResponseData_Ctor(MAKE_RVA(0x0000000140CA1BF0));
-	uintptr_t				kCachedResponseData_Ctor_Hook = kCachedResponseData_Ctor + 0xEF;
-	uintptr_t				kCachedResponseData_Ctor_Ret = kCachedResponseData_Ctor + 0xF4;
+	RelocAddr<uintptr_t>	kDialogueResponse_Ctor(MAKE_RVA(0x0000000140B3ACD0));
+	uintptr_t				kDialogueResponse_Ctor_Hook = kDialogueResponse_Ctor + 0x102;
+	uintptr_t				kDialogueResponse_Ctor_Ret = kDialogueResponse_Ctor + 0x107;
 
 	// E8 ? ? ? ? 4C 8B 74 24 ? C6 45 3E 01
-	RelocAddr<uintptr_t>	kASCM_QueueNPCChatterData(MAKE_RVA(0x00000001412B2F70));
-	uintptr_t				kASCM_QueueNPCChatterData_DialogSubs_Hook = kASCM_QueueNPCChatterData + 0xAA;
-	uintptr_t				kASCM_QueueNPCChatterData_DialogSubs_Show = kASCM_QueueNPCChatterData + 0xBB;
-	uintptr_t				kASCM_QueueNPCChatterData_DialogSubs_Exit = kASCM_QueueNPCChatterData + 0x284;
+	RelocAddr<uintptr_t>	kSubtitleManager_ShowSubtitle(MAKE_RVA(0x0000000140FF69D0));
+	uintptr_t				kSubtitleManager_ShowSubtitle_DialogSubs_Hook = kSubtitleManager_ShowSubtitle + 0xB6;
+	uintptr_t				kSubtitleManager_ShowSubtitle_DialogSubs_Show = kSubtitleManager_ShowSubtitle + 0xC3;
+	uintptr_t				kSubtitleManager_ShowSubtitle_DialogSubs_Exit = kSubtitleManager_ShowSubtitle + 0x188;
 
-	uintptr_t				kASCM_QueueNPCChatterData_GeneralSubs_Hook = kASCM_QueueNPCChatterData + 0x150;
-	uintptr_t				kASCM_QueueNPCChatterData_GeneralSubs_Show = kASCM_QueueNPCChatterData + 0x162;
-	uintptr_t				kASCM_QueueNPCChatterData_GeneralSubs_Exit = kASCM_QueueNPCChatterData + 0x284;
+	uintptr_t				kSubtitleManager_ShowSubtitle_GeneralSubs_Hook = kSubtitleManager_ShowSubtitle + 0x17D;
+	uintptr_t				kSubtitleManager_ShowSubtitle_GeneralSubs_Show = kSubtitleManager_ShowSubtitle + 0x19E;
+	uintptr_t				kSubtitleManager_ShowSubtitle_GeneralSubs_Exit = kSubtitleManager_ShowSubtitle + 0x188;
 
+	// E8 ? ? ? ? 48 8B 74 24 ? 84 C0 75 18
+	RelocAddr<uintptr_t>	kSubtitleManager_DisplayNextSubtitle(MAKE_RVA(0x0000000140FF7070));
+	uintptr_t				kSubtitleManager_DisplayNextSubtitle_DialogSubs_Hook = kSubtitleManager_DisplayNextSubtitle + 0x12B;
+	uintptr_t				kSubtitleManager_DisplayNextSubtitle_DialogSubs_Show = kSubtitleManager_DisplayNextSubtitle + 0x14E;
+	uintptr_t				kSubtitleManager_DisplayNextSubtitle_DialogSubs_Exit = kSubtitleManager_DisplayNextSubtitle + 0x134;
 
-	// 40 56 41 54 48 83 EC 48 48 8B F1
-	RelocAddr<uintptr_t>	kASCM_DisplayQueuedNPCChatterData(MAKE_RVA(0x00000001412B3530));
-	uintptr_t				kASCM_DisplayQueuedNPCChatterData_DialogSubs_Hook = kASCM_DisplayQueuedNPCChatterData + 0xC6;
-	uintptr_t				kASCM_DisplayQueuedNPCChatterData_DialogSubs_Show = kASCM_DisplayQueuedNPCChatterData + 0xE4;
-	uintptr_t				kASCM_DisplayQueuedNPCChatterData_DialogSubs_Exit = kASCM_DisplayQueuedNPCChatterData + 0xCF;
-
-	uintptr_t				kASCM_DisplayQueuedNPCChatterData_GeneralSubs_Hook = kASCM_DisplayQueuedNPCChatterData + 0xD7;
-	uintptr_t				kASCM_DisplayQueuedNPCChatterData_GeneralSubs_Show = kASCM_DisplayQueuedNPCChatterData + 0xE4;
-	uintptr_t				kASCM_DisplayQueuedNPCChatterData_GeneralSubs_Exit = kASCM_DisplayQueuedNPCChatterData + 0x199;
+	uintptr_t				kSubtitleManager_DisplayNextSubtitle_GeneralSubs_Hook = kSubtitleManager_DisplayNextSubtitle + 0x141;
+	uintptr_t				kSubtitleManager_DisplayNextSubtitle_GeneralSubs_Show = kSubtitleManager_DisplayNextSubtitle + 0x14E;
+	uintptr_t				kSubtitleManager_DisplayNextSubtitle_GeneralSubs_Exit = kSubtitleManager_DisplayNextSubtitle + 0x2A2;
 }
 
 
-void SneakAtackVoicePath(CachedResponseData* Data, char* VoicePathBuffer)
+void SneakAtackVoicePath(DialogueResponse* Data, char* VoicePathBuffer)
 {
 	// overwritten code
 	CALL_MEMBER_FN(&Data->voiceFilePath, Set)(VoicePathBuffer);
@@ -56,7 +55,7 @@ void SneakAtackVoicePath(CachedResponseData* Data, char* VoicePathBuffer)
 	BSIStream* FUZStream = BSIStream::CreateInstance(FUZPath.c_str());
 	BSIStream* XWMStream = BSIStream::CreateInstance(XWMPath.c_str());
 
-#if 0
+#ifndef NDEBUG
 	_MESSAGE("Expected: %s", VoicePathBuffer);
 	gLog.Indent();
 	_MESSAGE("WAV Stream [%s] Validity = %d", WAVPath.c_str(), WAVStream->valid);
@@ -66,12 +65,13 @@ void SneakAtackVoicePath(CachedResponseData* Data, char* VoicePathBuffer)
 #endif
 
 #ifndef NDEBUG
-	if (!(WAVStream->valid == 0 && FUZStream->valid == 0 && XWMStream->valid == 0))
+	if (true)
 #else
 	if (WAVStream->valid == 0 && FUZStream->valid == 0 && XWMStream->valid == 0)
 #endif
 	{
 		static const int kWordsPerSecond = kWordsPerSecondSilence.GetData().i;
+		static const int kCharacterPerWord = kWideCharacterPerWord.GetData().i;
 		static const int kMaxSeconds = 10;
 
 		int SecondsOfSilence = 2;
@@ -80,11 +80,29 @@ void SneakAtackVoicePath(CachedResponseData* Data, char* VoicePathBuffer)
 
 		if (ResponseText.length() > 4 && strncmp(ResponseText.c_str(), "<ID=", 4))
 		{
-			SME::StringHelpers::Tokenizer TextParser(ResponseText.c_str(), " ");
 			int WordCount = 0;
-
-			while (TextParser.NextToken(ResponseText) != -1)
-				WordCount++;
+			int WideCharCount = 0;
+			int CharOver = 0;
+			for (char ch : ResponseText) // check each character
+			{
+				if (CharOver > 0) // this char is part of a wide-character, pass it
+				{
+					CharOver --;
+					continue;
+				}
+				if (ch & 0x80 && ch & 0x40 && ch & 0x20)
+				{
+					if (ch & 0x10)
+						CharOver = 3; // a 4 wide-character, 3 bytes left
+					else
+						CharOver = 2; // a 3 wide-character, 2 bytes left
+					WideCharCount ++;
+					// What about 2 wide-character? These "2 wide-character languages" basically use spaces to separate words by my google
+				}
+				else
+					WordCount += (ch == ' ');
+			}
+			WordCount += (WideCharCount / kCharacterPerWord);
 
 			SecondsOfSilence = WordCount / ((kWordsPerSecond > 0) ? kWordsPerSecond : 2) + 1;
 
@@ -113,7 +131,7 @@ void SneakAtackVoicePath(CachedResponseData* Data, char* VoicePathBuffer)
 	XWMStream->Dtor();
 }
 
-bool ShouldForceSubs(NPCChatterData* ChatterData, UInt32 ForceRegardless, StringCache::Ref* Subtitle)
+bool ShouldForceSubs(SubtitleInfo* SubtitleInfo, UInt32 ForceRegardless, StringCache::Ref* Subtitle)
 {
 	bool Result = false;
 
@@ -125,7 +143,7 @@ bool ShouldForceSubs(NPCChatterData* ChatterData, UInt32 ForceRegardless, String
 
 		Result = true;
 	}
-	else if (ForceRegardless || (ChatterData && ChatterData->forceSubtitles))
+	else if (ForceRegardless || (SubtitleInfo && SubtitleInfo->priority != 0))
 		Result = true;
 
 	return Result;
@@ -136,13 +154,13 @@ bool ShouldForceSubs(NPCChatterData* ChatterData, UInt32 ForceRegardless, String
 
 bool InstallHooks()
 {
-	if (!g_branchTrampoline.Create(1024 * 2))
+	if (!g_branchTrampoline.Create(512))
 	{
 		_ERROR("Couldn't create branch trampoline. this is fatal. skipping remainder of init process.");
 		return false;
 	}
 
-	if (!g_localTrampoline.Create(1024 * 2, nullptr))
+	if (!g_localTrampoline.Create(512, nullptr))
 	{
 		_ERROR("Couldn't create codegen buffer. this is fatal. skipping remainder of init process.");
 		return false;
@@ -165,7 +183,7 @@ bool InstallHooks()
 				jmp(ptr[rip + RetnLabel]);
 
 			L(RetnLabel);
-				dq(hookedAddresses::kCachedResponseData_Ctor_Ret);
+				dq(hookedAddresses::kDialogueResponse_Ctor_Ret);
 			}
 		};
 
@@ -173,29 +191,31 @@ bool InstallHooks()
 		HotswapReponseAssetPath_Code Code(CodeBuf);
 		g_localTrampoline.EndAlloc(Code.getCurr());
 
-		g_branchTrampoline.Write5Branch(hookedAddresses::kCachedResponseData_Ctor_Hook, uintptr_t(Code.getCode()));
+		g_branchTrampoline.Write5Branch(hookedAddresses::kDialogueResponse_Ctor_Hook, uintptr_t(Code.getCode()));
 	}
 
 	{
-		struct ASCMQueueNPCChatterData_DialogSubs_Code : Xbyak::CodeGenerator
+		struct SubtitleManager_ShowSubtitle_DialogSubs_Code : Xbyak::CodeGenerator
 		{
-			ASCMQueueNPCChatterData_DialogSubs_Code(void* buf) : Xbyak::CodeGenerator(4096, buf)
+			SubtitleManager_ShowSubtitle_DialogSubs_Code(void* buf) : Xbyak::CodeGenerator(4096, buf)
 			{
 				Xbyak::Label ShowLabel;
 
-				push(rax);	// save/restore the handle to the source actor
+				movzx(rax, byte[rsp + 0xC0]); // is being spoken to the PC
+				push(rsi);	// save/restore the handle to the source actor
+				push(rax);
 
-				mov(byte[rbp + 0x48], r14b);
 				mov(rax, (uintptr_t)CanShowDialogSubtitles);
 				PUSH_VOLATILE;
 				call(rax);
 				POP_VOLATILE;
 				test(al, al);
+				pop(rax); // is being spoken to the PC need for the next check
 				jnz(ShowLabel);
 
 				PUSH_VOLATILE;
 				xor (rcx, rcx);
-				movzx(rdx, byte[rbp + 0x60]);
+				mov(rdx, rax);  
 				mov(r8, r13);
 				mov(rax, (uintptr_t)ShouldForceSubs);
 				call(rax);
@@ -203,45 +223,47 @@ bool InstallHooks()
 				test(al, al);
 				jnz(ShowLabel);
 
-				pop(rax);
+				pop(rsi);
 				jmp(ptr[rip]);
-				dq(hookedAddresses::kASCM_QueueNPCChatterData_DialogSubs_Exit);
+				dq(hookedAddresses::kSubtitleManager_ShowSubtitle_DialogSubs_Exit);
 
 			L(ShowLabel);
-				pop(rax);
+				pop(rsi);
 				jmp(ptr[rip]);
-				dq(hookedAddresses::kASCM_QueueNPCChatterData_DialogSubs_Show);
+				dq(hookedAddresses::kSubtitleManager_ShowSubtitle_DialogSubs_Show);
 			}
 		};
 
 		void* CodeBuf = g_localTrampoline.StartAlloc();
-		ASCMQueueNPCChatterData_DialogSubs_Code Code(CodeBuf);
+		SubtitleManager_ShowSubtitle_DialogSubs_Code Code(CodeBuf);
 		g_localTrampoline.EndAlloc(Code.getCurr());
 
-		g_branchTrampoline.Write5Branch(hookedAddresses::kASCM_QueueNPCChatterData_DialogSubs_Hook, uintptr_t(Code.getCode()));
+		g_branchTrampoline.Write5Branch(hookedAddresses::kSubtitleManager_ShowSubtitle_DialogSubs_Hook, uintptr_t(Code.getCode()));
 	}
 
 
 	{
-		struct ASCMQueueNPCChatterData_GeneralSubs_Code : Xbyak::CodeGenerator
+		struct SubtitleManager_ShowSubtitle_GeneralSubs_Code : Xbyak::CodeGenerator
 		{
-			ASCMQueueNPCChatterData_GeneralSubs_Code(void* buf) : Xbyak::CodeGenerator(4096, buf)
+			SubtitleManager_ShowSubtitle_GeneralSubs_Code(void* buf) : Xbyak::CodeGenerator(4096, buf)
 			{
 				Xbyak::Label ShowLabel;
 
-				push(rax);	// save/restore the handle to the source actor
+				movzx(rax, byte[rsp + 0xC0]); // is being spoken to the PC
+				push(rsi);	// save/restore the handle to the source actor
+				push(rax);
 
-				mov(byte[rbp + 0x48], al);
 				mov(rax, (uintptr_t)CanShowGeneralSubtitles);
 				PUSH_VOLATILE;
 				call(rax);
 				POP_VOLATILE;
 				test(al, al);
+				pop(rax); // is being spoken to the PC need for the next check
 				jnz(ShowLabel);
 
 				PUSH_VOLATILE;
 				xor (rcx, rcx);
-				movzx(rdx, byte[rbp + 0x60]);
+				mov(rdx, rax);
 				mov(r8, r13);
 				mov(rax, (uintptr_t)ShouldForceSubs);
 				call(rax);
@@ -249,30 +271,30 @@ bool InstallHooks()
 				test(al, al);
 				jnz(ShowLabel);
 
-				pop(rax);
+				pop(rsi);
 				jmp(ptr[rip]);
-				dq(hookedAddresses::kASCM_QueueNPCChatterData_GeneralSubs_Exit);
+				dq(hookedAddresses::kSubtitleManager_ShowSubtitle_GeneralSubs_Exit);
 
 			L(ShowLabel);
-				pop(rax);
+				pop(rsi);
 				jmp(ptr[rip]);
-				dq(hookedAddresses::kASCM_QueueNPCChatterData_GeneralSubs_Show);
+				dq(hookedAddresses::kSubtitleManager_ShowSubtitle_GeneralSubs_Show);
 			}
 		};
 
 		void* CodeBuf = g_localTrampoline.StartAlloc();
-		ASCMQueueNPCChatterData_GeneralSubs_Code Code(CodeBuf);
+		SubtitleManager_ShowSubtitle_GeneralSubs_Code Code(CodeBuf);
 		g_localTrampoline.EndAlloc(Code.getCurr());
 
-		g_branchTrampoline.Write5Branch(hookedAddresses::kASCM_QueueNPCChatterData_GeneralSubs_Hook, uintptr_t(Code.getCode()));
+		g_branchTrampoline.Write5Branch(hookedAddresses::kSubtitleManager_ShowSubtitle_GeneralSubs_Hook, uintptr_t(Code.getCode()));
 	}
 
 
 
 	{
-		struct ASCMDisplayQueuedNPCChatterData_DialogSubs_Code : Xbyak::CodeGenerator
+		struct SubtitleManager_DisplayNextSubtitle_DialogSubs_Code : Xbyak::CodeGenerator
 		{
-			ASCMDisplayQueuedNPCChatterData_DialogSubs_Code(void * buf) : Xbyak::CodeGenerator(4096, buf)
+			SubtitleManager_DisplayNextSubtitle_DialogSubs_Code(void * buf) : Xbyak::CodeGenerator(4096, buf)
 			{
 				Xbyak::Label ShowLabel;
 
@@ -284,7 +306,8 @@ bool InstallHooks()
 				jnz(ShowLabel);
 
 				PUSH_VOLATILE;
-				mov(rcx, rdi);
+				mov(rcx, r14);	// queued subtitle buffer
+				add(rcx, rsi);	// index into the above
 				xor(rdx, rdx);
 				xor(r8, r8);
 				mov(rax, (uintptr_t)ShouldForceSubs);
@@ -294,25 +317,25 @@ bool InstallHooks()
 				jnz(ShowLabel);
 
 				jmp(ptr[rip]);
-				dq(hookedAddresses::kASCM_DisplayQueuedNPCChatterData_DialogSubs_Exit);
+				dq(hookedAddresses::kSubtitleManager_DisplayNextSubtitle_DialogSubs_Exit);
 
 			L(ShowLabel);
 				jmp(ptr[rip]);
-				dq(hookedAddresses::kASCM_DisplayQueuedNPCChatterData_DialogSubs_Show);
+				dq(hookedAddresses::kSubtitleManager_DisplayNextSubtitle_DialogSubs_Show);
 			}
 		};
 
 		void* CodeBuf = g_localTrampoline.StartAlloc();
-		ASCMDisplayQueuedNPCChatterData_DialogSubs_Code Code(CodeBuf);
+		SubtitleManager_DisplayNextSubtitle_DialogSubs_Code Code(CodeBuf);
 		g_localTrampoline.EndAlloc(Code.getCurr());
 
-		g_branchTrampoline.Write5Branch(hookedAddresses::kASCM_DisplayQueuedNPCChatterData_DialogSubs_Hook, uintptr_t(Code.getCode()));
+		g_branchTrampoline.Write5Branch(hookedAddresses::kSubtitleManager_DisplayNextSubtitle_DialogSubs_Hook, uintptr_t(Code.getCode()));
 	}
 
 	{
-		struct ASCMDisplayQueuedNPCChatterData_GeneralSubs_Code : Xbyak::CodeGenerator
+		struct SubtitleManager_DisplayNextSubtitle_GeneralSubs_Code : Xbyak::CodeGenerator
 		{
-			ASCMDisplayQueuedNPCChatterData_GeneralSubs_Code(void * buf) : Xbyak::CodeGenerator(4096, buf)
+			SubtitleManager_DisplayNextSubtitle_GeneralSubs_Code(void * buf) : Xbyak::CodeGenerator(4096, buf)
 			{
 				Xbyak::Label ShowLabel;
 
@@ -324,7 +347,8 @@ bool InstallHooks()
 				jnz(ShowLabel);
 
 				PUSH_VOLATILE;
-				mov(rcx, rdi);
+				mov(rcx, r14);	// queued subtitle buffer
+				add(rcx, rsi);	// index into the above
 				xor(rdx, rdx);
 				xor(r8, r8);
 				mov(rax, (uintptr_t)ShouldForceSubs);
@@ -334,19 +358,19 @@ bool InstallHooks()
 				jnz(ShowLabel);
 
 				jmp(ptr[rip]);
-				dq(hookedAddresses::kASCM_DisplayQueuedNPCChatterData_GeneralSubs_Exit);
+				dq(hookedAddresses::kSubtitleManager_DisplayNextSubtitle_GeneralSubs_Exit);
 
 			L(ShowLabel);
 				jmp(ptr[rip]);
-				dq(hookedAddresses::kASCM_DisplayQueuedNPCChatterData_GeneralSubs_Show);
+				dq(hookedAddresses::kSubtitleManager_DisplayNextSubtitle_GeneralSubs_Show);
 			}
 		};
 
 		void* CodeBuf = g_localTrampoline.StartAlloc();
-		ASCMDisplayQueuedNPCChatterData_GeneralSubs_Code Code(CodeBuf);
+		SubtitleManager_DisplayNextSubtitle_GeneralSubs_Code Code(CodeBuf);
 		g_localTrampoline.EndAlloc(Code.getCurr());
 
-		g_branchTrampoline.Write5Branch(hookedAddresses::kASCM_DisplayQueuedNPCChatterData_GeneralSubs_Hook, uintptr_t(Code.getCode()));
+		g_branchTrampoline.Write5Branch(hookedAddresses::kSubtitleManager_DisplayNextSubtitle_GeneralSubs_Hook, uintptr_t(Code.getCode()));
 	}
 
 

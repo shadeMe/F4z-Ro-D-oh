@@ -29,38 +29,22 @@ extern "C"
 		}
 	}
 
-	bool F4SEPlugin_Query(const F4SEInterface * F4SE, PluginInfo * info)
+	__declspec(dllexport) bool F4SEPlugin_Load(const F4SEInterface * F4SE)
 	{
 		gLog.OpenRelative(CSIDL_MYDOCUMENTS, "\\My Games\\Fallout4\\F4SE\\F4z Ro D-oh.log");
 		_MESSAGE("%s Initializing...", MakeSillyName().c_str());
-
-		// populate info structure
-		info->infoVersion = PluginInfo::kInfoVersion;
-		info->name = "F4z Ro D'oh";
-		info->version = PACKED_SME_VERSION;
 
 		interfaces::kPluginHandle = F4SE->GetPluginHandle();
 		interfaces::kMsgInterface = (F4SEMessagingInterface*)F4SE->QueryInterface(kInterface_Messaging);
 
 		if (F4SE->isEditor)
 			return false;
-		else if (F4SE->runtimeVersion != RUNTIME_VERSION_1_10_163)
-		{
-			_MESSAGE("Unsupported runtime version %08X", F4SE->runtimeVersion);
-			return false;
-		}
 		else if (!interfaces::kMsgInterface)
 		{
 			_MESSAGE("Couldn't initialize messaging interface");
 			return false;
 		}
 
-		// supported runtime version
-		return true;
-	}
-
-	bool F4SEPlugin_Load(const F4SEInterface * F4SE)
-	{
 		_MESSAGE("Initializing INI Manager");
 		F4zRoDohINIManager::Instance.Initialize("Data\\F4SE\\Plugins\\F4z Ro D'oh.ini", nullptr);
 
@@ -74,5 +58,18 @@ extern "C"
 
 		return true;
 	}
+
+	__declspec(dllexport) F4SEPluginVersionData F4SEPlugin_Version =
+	{
+		F4SEPluginVersionData::kVersion,
+
+		PACKED_SME_VERSION,
+		"Fuz Ro D'oh",
+		"shadeMe",
+		0,	// Version-dependent
+		0,	// Structure-dependent
+		{ RUNTIME_VERSION_1_10_984, 0 },
+		0,
+	};
 
 };

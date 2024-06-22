@@ -18,6 +18,8 @@
 #include <chrono>
 #include <unordered_set>
 
+class TESTopicInfo;
+
 extern IDebugLog						gLog;
 
 namespace interfaces
@@ -28,6 +30,7 @@ namespace interfaces
 
 
 extern SME::INI::INISetting				kWordsPerSecondSilence;
+extern SME::INI::INISetting				kWideCharacterPerWord;
 extern SME::INI::INISetting				kSkipEmptyResponses;
 
 #define MAKE_RVA(addr)		addr - 0x140000000i64
@@ -73,7 +76,7 @@ public:
 	MEMBER_FN_PREFIX(BSIStream);
 
 	// E8 ? ? ? ? 33 DB 38 5C 24 30
-	DEFINE_MEMBER_FN(Ctor, BSIStream*, MAKE_RVA(0x0000000141CC5B30), const char* FilePath, void* ParentLocation, bool Arg3);
+	DEFINE_MEMBER_FN(Ctor, BSIStream*, MAKE_RVA(0x00000001416BD9D0), const char* FilePath, void* ParentLocation, bool Arg3);
 
 	// members
 	///*00*/ void**					vtbl;
@@ -91,7 +94,7 @@ STATIC_ASSERT(sizeof(BSIStream) == 0x20);
 
 
 // 40
-class CachedResponseData
+class DialogueResponse
 {
 public:
 	// members
@@ -108,22 +111,22 @@ public:
 	/*3A*/ UInt8					unk3A;
 	/*3B*/ UInt8					pad3B[5];
 };
-STATIC_ASSERT(sizeof(CachedResponseData) == 0x40);
+STATIC_ASSERT(sizeof(DialogueResponse) == 0x40);
 
 // 20
-class NPCChatterData
+class SubtitleInfo
 {
 public:
 	// members
 	/*00*/ UInt32					speaker;				// the BSHandleRefObject handle to the speaker
 	/*04*/ UInt8					pad04[4];
 	/*08*/ StringCache::Ref			title;
-	/*10*/ void*					unk10;					// seen { float, ... }
-	/*18*/ UInt8					forceSubtitles;
+	/*10*/ TESTopicInfo*			topic;
+	/*18*/ UInt8					priority;
 	/*19*/ UInt8					pad19[3];
-	/*1C*/ float					subtitleDistance;		// init to float::MAX, comapred to the second power of "fMaxSubtitleDistance_Interface"
+	/*1C*/ float					distanceFromPlayer;		// init to float::MAX, comapred to the second power of "fMaxSubtitleDistance_Interface"
 };
-STATIC_ASSERT(sizeof(NPCChatterData) == 0x20);
+STATIC_ASSERT(sizeof(SubtitleInfo) == 0x20);
 
 
 
